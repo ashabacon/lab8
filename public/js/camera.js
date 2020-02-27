@@ -1,8 +1,13 @@
 function initCamera() {
   // Uncomment and fill in the correct selectors below.
-  // capture($('<Your code here>'),
-  //        $('<Your code here>'),
-  //        $('<Your code here>'));
+  capture($('#camera-video'),
+         $('#camera-canvas'),
+         $('#camera-button'));
+
+  $('#camera-exit').click(function(){
+      vidOff();
+      // $('#camera-video').hide();
+    });
 
   // For Reference:
   // capture($('#camera-video'),
@@ -28,7 +33,7 @@ function capture(video, canvas, snapshotButton) {
         //Calculate dimension of photo from the video element.
         var width = video.width();
         var height = video.height();
-        
+
         canvas.attr('width', width);
         canvas.attr('height', height);
         ctx.drawImage(video[0], 0, 0, width, height);
@@ -47,3 +52,12 @@ function capture(video, canvas, snapshotButton) {
 
 };
 
+function vidOff() {
+  //clearInterval(theDrawLoop);
+  //ExtensionData.vidStatus = 'off';
+  var vid = document.querySelector('#camera-video');
+  vid.pause();
+  vid.src = "";
+  vid.srcObject.getTracks()[0].stop();
+  console.log("Vid off");
+};
